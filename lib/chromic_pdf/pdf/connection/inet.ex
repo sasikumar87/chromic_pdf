@@ -63,8 +63,8 @@ if Code.ensure_loaded?(WebSockex) do
 
       case :httpc.request(:get, {url, headers}, http_request_opts, []) do
         {:ok, {_, _, body}} ->
+          require Logger ; Logger.debug(body)
           body
-          |> dbg()
           |> Jason.decode!()
           |> Map.fetch!("webSocketDebuggerUrl")
 
