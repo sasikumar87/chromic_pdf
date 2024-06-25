@@ -58,7 +58,8 @@ if Code.ensure_loaded?(WebSockex) do
       :inets.start()
 
       url = String.to_charlist("http://#{host}:#{port}/json/version")
-      headers = [{'accept', 'application/json'}]
+      # https://github.com/chromedp/chromedp/issues/505#issuecomment-549188061
+      headers = [{'accept', 'application/json'}, {'HOST', 'localhost'}]
       http_request_opts = [ssl: [verify: :verify_none]]
 
       case :httpc.request(:get, {url, headers}, http_request_opts, []) do
